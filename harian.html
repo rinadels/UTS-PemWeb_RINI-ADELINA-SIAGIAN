@@ -1,0 +1,219 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>RINI ADELINA SIAGIAN</title>
+    <link rel="shortcut icon" href="https://sennajs.com/images/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Including Senna -->
+    <script src="/senna/senna-min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.2/css/bootstrap.min.css"
+        integrity="sha512-rt/SrQ4UNIaGfDyEXZtNcyWvQeOq0QLygHluFQcSjaGB04IxWhal71tKuzP6K8eYXYB6vJV4pHkXcmFGGQ1/0w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+        integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.2/js/bootstrap.min.js"
+        integrity="sha512-7rusk8kGPFynZWu26OKbTeI+QPoYchtxsmPeBqkHIEXJxeun4yJ4ISYe7C6sz9wdxeE1Gk3VxsIWgCZTc+vX3g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+
+<body data-senna data-senna-surface>
+    <nav class="navbar navbar-expand-md bg-white shadow-sm navbar-light">
+        <div class="container">
+            <!-- Brand -->
+            <a class="navbar-brand" href="/index.html">Covid19</a>
+
+            <!-- Toggler/collapsibe Button -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navbar links -->
+            <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/index.html">Beranda</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/tentang.html">Tentang</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Linkedin</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <br>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-sm-12 col-md-4">
+                <a class="text-decoration-none" href="/statistik.html">
+                    <div class="card shadow-sm card-covid">
+                        <div class="card-body p-5 text-center">
+                            <h3>
+                                <i class="fa-solid text-warning fa-chart-simple"></i> 
+                                <span class="ml-2 text-secondary">Statistik Covid19</span>
+                            </h3>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-4 col-sm-12 col-md-4">
+                <a class="text-decoration-none" href="/harian.html">
+                    <div class="card shadow-sm card-covid">
+                        <div class="card-body p-5 text-center">
+                            <h3>
+                                <i class="fa-solid fa-ranking-star text-warning"></i>
+                                <span class="ml-2 text-secondary">Data Harian</span>
+                            </h3>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-4 col-sm-12 col-md-4">
+                <a class="text-decoration-none" href="/skor.html">
+                    <div class="card shadow-sm card-covid">
+                        <div class="card-body p-5 text-center">
+                            <h3>
+                                <i class="fa-solid fa-bars-staggered text-warning"></i>
+                                <span class="ml-2 text-secondary">Skor Resiko</span>
+                            </h3>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- End of content surface -->
+
+    <br><br>
+
+    <div class="container">
+        <h4 class="text-secondary">
+            Data Harian
+        </h4>
+
+        <br>
+
+        <div class="table-responsive">
+            <table class="table-hover table">
+                <thead>
+                    <tr>
+                        <td>
+                            No
+                        </td>
+                        <td>
+                            Tanggal
+                        </td>
+                        <td>
+                            Jumlah Meninggal
+                        </td>
+                        <td>
+                            Jumlah Positif
+                        </td>
+                        <td>
+                            Jumlah Sembuh
+                        </td>
+                        <td>
+                            Jumlah Dirawat
+                        </td>
+                    </tr>
+                </thead>
+
+                <tbody id="covidContent">
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        if(sessionStorage.getItem("covidDataHarian")) {
+
+            let covidData = JSON.parse(sessionStorage.getItem("covidDataHarian"))
+
+            let covidContent = ""
+            let no = 1
+
+            console.table(covidData)
+
+            covidData.forEach(function(covid) {
+                covidContent += `
+                    <tr>
+                        <td>
+                            ${no++}
+                        </td>
+                        <td>
+                            ${(covid.key_as_string).substring(0,10)}
+                        </td>
+                        <td>
+                            ${covid.jumlah_meninggal.value}
+                        </td>
+                        <td>
+                            ${covid.jumlah_positif.value}
+                        </td>
+                        <td>
+                            ${covid.jumlah_sembuh.value}
+                        </td>
+                        <td>
+                            ${covid.jumlah_dirawat.value}
+                        </td>
+                    </tr>
+                `
+            })
+
+            $("#covidContent").html(covidContent)
+
+        } else {
+            var update_harian = "https://teguh.rijanandi.com/covid_api/update.php"
+            $.ajax({
+                url: update_harian,
+                type: "GET",
+                dataType: "json",
+                success: function(data) {
+                    let covidContent = ""
+                    let no = 1
+                    let covidData = data.update.harian
+
+                    console.table(covidData)
+
+                    covidData.forEach(function(covid) {
+                        covidContent += `
+                            <tr>
+                                <td>
+                                    ${no++}
+                                </td>
+                                <td>
+                                    ${no++}
+                                </td>
+                                <td>
+                                    ${covid.key_as_string}
+                                </td>
+                                <td>
+                                    ${covid.jumlah_positif.value}
+                                </td>
+                                <td>
+                                    ${covid.jumlah_sembuh.value}
+                                </td>
+                                <td>
+                                    ${covid.jumlah_dirawat.value}
+                                </td>
+                            </tr>
+                        `
+                    })
+
+                    $("#covidContent").html(covidContent)
+                }
+            })
+        }
+    </script>
+</body>
+
+</html>
